@@ -8,7 +8,7 @@ usb midi keyboard to qwer keyboard convertor
               │                                │           │                                  │       
               │                                │           │                                  │       
               │                                │           │                                  │       
-MIDI KEYBOARD │ USB                   SERIAL2  │           │ SERIAL2                    USB   │       
+MIDI KEYBOARD │ USB                   SERIAL2  │           │ SERIAL2                    USB   │   PC    
          ─────┼───                          RX───────────────TX                           ────┼───────
               │                             TX───────────────RX                               │       
               │                                │           │                                  │       
