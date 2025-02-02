@@ -19,4 +19,5 @@ MIDI KEYBOARD │ USB                   SERIAL2  │           │ SERIAL2      
 
 ```
 
-
+#USB MIDI HOST 
+use https://github.com/rppicomidi/usb_midi_host
