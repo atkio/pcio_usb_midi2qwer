@@ -22,6 +22,13 @@
 #else
 #warning "All Serial Monitor Output is on Serial1"
 #endif
+#include <Adafruit_NeoPixel.h>
+
+#define DIN_PIN 16            // NeoPixel　の出力ピン番号はGP16
+#define LED_COUNT 1           // LEDの連結数
+#define WAIT_MS 1000          // 次の点灯までのウエイト
+#define BRIGHTNESS 64        // 輝度
+Adafruit_NeoPixel pixels(LED_COUNT, DIN_PIN, NEO_GRB + NEO_KHZ800);
 
 #include "Adafruit_TinyUSB.h"
 
@@ -52,8 +59,24 @@ void setup()
   // The commented out code shows the default values
   // tuh_midih_define_limits(64, 64, 16);
 
-  USBHost.begin(0); // 0 means use native RP2040 host
+  // pinMode(29, INPUT_PULLUP);
+  // pinMode(26, OUTPUT);
+  // pinMode(27, OUTPUT);
+  // digitalWrite(26, HIGH);
+  // digitalWrite(27, HIGH);
+  // delay(2000);
+  // int buttonState = digitalRead(29);
+  // if (buttonState == HIGH) {
+  //   digitalWrite(27, LOW);
+  // } else {
+  //   digitalWrite(26, LOW);
+  // }
 
+
+  USBHost.begin(0); // 0 means use native RP2040 host
+  pixels.begin();             //NeoPixel制御開始
+  pixels.setPixelColor(0, pixels.Color(BRIGHTNESS, 0, 0));
+  pixels.show();
   Serial1.println("TinyUSB MIDI Host Example");
 }
 
@@ -77,6 +100,8 @@ static void send_next_note(bool connected)
     tuh_midi_stream_flush(midi_dev_addr);
     // New note every interval ms
     if (millis() - start_ms < interval_ms) {
+      
+
         return; // not enough time
     }
     start_ms += interval_ms;
@@ -106,6 +131,7 @@ void loop()
   bool connected = midi_dev_addr != 0 && tuh_midi_configured(midi_dev_addr);
 
   send_next_note(connected);
+
 }
 
 
@@ -268,6 +294,14 @@ void tuh_midi_rx_cb(uint8_t dev_addr, uint32_t num_packets)
           Serial1.printf("%02x ", buffer[idx]);
         }
         Serial1.printf("\r\n");
+
+        if(buffer[0] = 0x90)
+        {
+          pixels.setPixelColor(0, pixels.Color(0, 0, BRIGHTNESS));
+          pixels.show();
+        }
+       
+        
         
       }
     }
@@ -278,4 +312,3 @@ void tuh_midi_tx_cb(uint8_t dev_addr)
 {
     (void)dev_addr;
 }
-
