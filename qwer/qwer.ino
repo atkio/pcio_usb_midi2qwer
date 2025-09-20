@@ -152,6 +152,16 @@ uint8_t mappingkey(uint8_t input)
 {
     switch(input)
     {
+      //
+      case 0x30 - 0xc: return HID_KEY_Z;
+      case 0x32 - 0xc: return HID_KEY_X;
+      case 0x34 - 0xc: return HID_KEY_C;
+      case 0x35 - 0xc: return HID_KEY_V;
+      case 0x37 - 0xc: return HID_KEY_B;
+      case 0x39 - 0xc: return HID_KEY_N;
+      case 0x3b - 0xc: return HID_KEY_M;
+
+      //
       case 0x30: return HID_KEY_A;
       case 0x32: return HID_KEY_S;
       case 0x34: return HID_KEY_D;
@@ -159,6 +169,7 @@ uint8_t mappingkey(uint8_t input)
       case 0x37: return HID_KEY_G;
       case 0x39: return HID_KEY_H;
       case 0x3b: return HID_KEY_J;
+      //
       case 0x3c: return HID_KEY_Q;
       case 0x3e: return HID_KEY_W;
       case 0x40: return HID_KEY_E;
@@ -166,6 +177,15 @@ uint8_t mappingkey(uint8_t input)
       case 0x43: return HID_KEY_T;
       case 0x45: return HID_KEY_Y;
       case 0x47: return HID_KEY_U;
+
+      //
+      case 0x3c + 0xc: return HID_KEY_1;
+      case 0x3e + 0xc: return HID_KEY_2;
+      case 0x40 + 0xc: return HID_KEY_3;
+      case 0x41 + 0xc: return HID_KEY_4;
+      case 0x43 + 0xc: return HID_KEY_5;
+      case 0x45 + 0xc: return HID_KEY_6;
+      case 0x47 + 0xc: return HID_KEY_7;
     }
     return 0;
 }
